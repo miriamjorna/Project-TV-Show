@@ -7,7 +7,7 @@
   border-radius: 8px;
   padding: 16px;
   margin: 16px;
-  box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 #root {
@@ -15,4 +15,29 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
   padding: 16px;
+}
+
+/* Search Bar Styles */
+.search-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ccc;
+}
+
+#search-bar {
+  padding: 10px 15px;
+  width: 300px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#search-count {
+  font-weight: bold;
+  font-size: 16px;
 }
