@@ -40,13 +40,13 @@ async function init() {
   showCount.textContent = "Loading shows…";
 
   try {
-     const data = await cachedFetch(SHOWS_URL);
+    const data = await cachedFetch(shows_URL);
 
     shows = data.sort((a, b) =>
       (a.name || "").toLowerCase().localeCompare((b.name || "").toLowerCase()),
     );
 
-      renderShows(shows);
+    renderShows(shows);
   } catch (err) {
     showCount.textContent = `Error: ${err.message}`;
   }
@@ -55,7 +55,7 @@ async function init() {
 // view shows: render grid
 function renderShows(list) {
   showsContainer.innerHTML = "";
-  showCount.textContent = `Showing ${list.length} / ${SHOWS.length} shows`;
+  showCount.textContent = `Showing ${list.length} / ${shows.length} shows`;
 
   if (list.length === 0) {
     const msg = document.createElement("p");
@@ -82,7 +82,7 @@ function buildShowCard(show) {
     card.appendChild(img);
   }
 
-// card body
+  // card body
   const body = document.createElement("div");
   body.className = "show-card-body";
 
@@ -116,7 +116,7 @@ function buildShowCard(show) {
     body.appendChild(p);
   }
 
-   card.appendChild(body);
+  card.appendChild(body);
   return card;
 }
 
@@ -131,12 +131,12 @@ function makeBadge(text, cls) {
 showSearchInput.addEventListener("input", () => {
   const q = showSearchInput.value.trim().toLowerCase();
 
-   if (!q) {
+  if (!q) {
     renderShows(shows);
     return;
   }
 
-  const filtered = SHOWS.filter((show) => {
+  const filtered = shows.filter((show) => {
     const name = (show.name || "").toLowerCase();
     const summary = stripHtml(show.summary || "").toLowerCase();
     const genres = (show.genres || []).join(" ").toLowerCase();
@@ -152,7 +152,7 @@ async function openEpisodesView(show) {
   showsView.style.display = "none";
   episodesView.style.display = "block";
 
-   // reset episode controls
+  // reset episode controls
   currentShowTitle.textContent = show.name;
   epSelect.innerHTML = `<option value="all-episodes">Show all episodes</option>`;
   searchInput.value = "";
@@ -161,7 +161,7 @@ async function openEpisodesView(show) {
 
   try {
     const url = `https://api.tvmaze.com/shows/${show.id}/episodes`;
-    EPISODES = await cachedFetch(url); // ← cached; never re-fetched
+    episodes = await cachedFetch(url); // ← cached; never re-fetched
 
     populateEpOptions();
     renderEpisodes(EPISODES);
@@ -184,8 +184,8 @@ function populateEpOptions() {
 
 // episode: render cards
 function renderEpisodes(list) {
-clearEpisodeCards();
-  epCount.textContent = `Displaying ${list.length} / ${EPISODES.length} episodes`;
+  clearEpisodeCards();
+  epCount.textContent = `Displaying ${list.length} / ${episodes.length} episodes`;
 
   list.forEach((ep) => {
     const clone = epCardTemplate.content.cloneNode(true);
@@ -202,7 +202,7 @@ clearEpisodeCards();
       img.style.display = "none";
     }
 
-     summary.innerHTML = ep.summary || "";
+    summary.innerHTML = ep.summary || "";
     epContainer.appendChild(clone);
   });
 }
@@ -213,7 +213,6 @@ function clearEpisodeCards() {
 
 // episodes: search and selector boxes/filters
 function applyFilters() {
-
   const query = searchInput.value.toLowerCase();
   const selectedEp = epSelect.value;
 
@@ -228,7 +227,7 @@ function applyFilters() {
   }
 
   if (selectedEp !== "all-episodes") {
- filtered = filtered.filter((ep) => ep.id === Number(selectedEp));
+    filtered = filtered.filter((ep) => ep.id === Number(selectedEp));
   }
 
   renderEpisodes(filtered);
