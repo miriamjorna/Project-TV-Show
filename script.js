@@ -80,6 +80,11 @@ function buildShowCard(show) {
     img.alt = show.name || "";
     img.loading = "lazy";
     card.appendChild(img);
+  } else {
+    const noImg = document.createElement("p");
+    noImg.className = "no-image";
+    noImg.textContent = "No image available";
+    card.appendChild(noImg);
   }
 
   // card body
@@ -108,13 +113,11 @@ function buildShowCard(show) {
 
   body.appendChild(meta);
 
-  // summary (HTML stripped to plain text for safety)
-  if (show.summary) {
-    const p = document.createElement("p");
-    p.className = "show-card-summary";
-    p.innerHTML = show.summary; // TVMaze returns safe HTML
-    body.appendChild(p);
-  }
+  // summary
+  const p = document.createElement("p");
+  p.className = "show-card-summary";
+  p.innerHTML = show.summary || "No summary available.";
+  body.appendChild(p);
 
   card.appendChild(body);
   return card;
