@@ -164,7 +164,7 @@ async function openEpisodesView(show) {
     episodes = await cachedFetch(url); // ← cached; never re-fetched
 
     populateEpOptions();
-    renderEpisodes(EPISODES);
+    renderEpisodes(episodes);
   } catch (err) {
     epCount.textContent = `Error: ${err.message}`;
   }
