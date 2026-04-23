@@ -8,28 +8,70 @@
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   </head>
   <body>
-    <!-- Search-Bar -->
-    <header class="search-bar">
-      <input
-        type="text"
-        id="search-bar"
-        placeholder="Search for an episode..."
-      />
-      <span id="search-count"></span>
-    </header>
+    <!-- show available shows on load -->
+<div id="shows-view">
+      <header class="center">
+        <h1>TV Show Episode Guide</h1>
+        <div class="search-wrap">
+          <input
+            type="text"
+            id="show-search-input"
+            placeholder="Search shows by name, genre or summary..."
+            aria-label="Search shows"
+          />
+          <p id="show-count" class="subtitle"></p>
+        </div>
+      </header>
 
-    <div id="root"></div>
+      <hr style="width: 90%" />
 
-    <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
-    <script src="episodes.js"></script>
+      <main id="shows-container"></main>
 
-    <!-- Loads YOUR javascript code -->
-    <script src="script.js"></script>
-    <p>
-      <i
-        >TV episodes data sourced from
-        <a href="https://www.tvmaze.com/api">TVMaze API</a>.</i
-      >
-    </p>
+      <footer class="center">
+        <p>TV episodes data sourced from
+        <i><a href="https://www.tvmaze.com/api">TVMaze API</a></i></p>
+      </footer>
+    </div>
+
+    <!-- Episodes view - hidden on load -->
+      <div id="episodes-view" style="display: none">
+      <header class="center">
+        <div class="ep-header-top">
+          <button id="back-btn">← Back to Shows</button>
+          <h1 id="current-show-title"></h1>
+        </div>
+        <div class="search-wrap">
+          <select id="ep-select">
+            <option value="all-episodes">Show all episodes</option>
+          </select>
+          <input
+            type="text"
+            id="search-input"
+            placeholder="Search episodes..."
+            aria-label="Search episodes"
+          />
+          <p id="ep-count" class="subtitle"></p>
+        </div>
+      </header>
+
+       <hr style="width: 90%" />
+
+      <main>
+        <div class="ep-container">
+          <template id="ep-card">
+            <section class="ep-section">
+              <img class="ep-img" alt="" />
+              <h3 class="ep-title"></h3>
+              <p class="ep-summary"></p>
+            </section>
+          </template>
+        </div>
+      </main>
+      
+      <footer class="center">
+        <p>TV episodes data sourced from
+        <i><a href="https://www.tvmaze.com/api">TVMaze API</a></i></p>
+      </footer>
+  
   </body>
 </html>
